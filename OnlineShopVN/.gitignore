@@ -6,3 +6,9 @@ instance/*.db
 instance/*.db-shm
 instance/*.db-wal
 .DS_Store
+cloudflared.exe
+cloudflared
+*.log
+*.err
+app.log
+cf.log

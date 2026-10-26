@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Đơn hàng của tôi | Mây Mart{% endblock %}
+{% block content %}<section class="page-banner slim-banner">
+    <div class="container">
+        <div class="breadcrumbs"><a href="{{ url_for('index') }}">Trang chủ</a><span>/</span><span>Đơn hàng</span></div>
+        <h1>Đơn hàng của tôi</h1>
+        <p>Theo dõi hành trình những món đồ đang trên đường đến với bạn.</p>
+    </div>
+</section>
+<section class="container section orders-page">{% if orders %}<div class="orders-list">{% for order in orders %}<a
+            class="order-card panel" href="{{ url_for('order_detail', order_id=order['id']) }}">
+            <div class="order-card-top">
+                <div><span class="order-label">MÃ ĐƠN HÀNG</span><strong>{{ order['order_code'] }}</strong></div><span
+                    class="status-badge status-{{ order['status']|replace(' ','-')|replace('Đ','d')|replace('ã','a')|replace('ờ','o')|replace('ậ','a')|replace('ứ','u')|replace('ư','u')|replace('ể','e')|replace('ạ','a')|replace('ò','o')|lower }}">{{
+                    order['status'] }}</span>
+            </div>
+            <div class="order-card-mid">
+                <div><span>Ngày đặt hàng </span><strong>{{ order['created_at'] }}</strong></div>
+                <div><span>Sản phẩm</span><strong>{{ order['items_count'] }} mặt hàng</strong></div>
+                <div><span>Tổng thanh toán</span><strong class="order-total">{{ order['total']|money }}</strong></div>
+            </div>
+            <div class="order-card-bottom"><span>Chi tiết đơn hàng và trạng thái giao hàng</span><b>Xem chi tiết →</b>
+            </div>
+        </a>{% endfor %}</div>{% else %}<div class="empty-state">
+        <div class="empty-icon">▤</div>
+        <h2>Bạn chưa có đơn hàng nào</h2>
+        <p>lựa chọn thú vị đang chờ bạn khám phá.</p><a class="btn btn-primary" href="{{ url_for('catalog') }}">Bắt
+            đầu mua sắm</a>
+    </div>{% endif %}</section>{% endblock %}
